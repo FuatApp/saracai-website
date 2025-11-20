@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automation Engine - SaracAI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { overflow-x: hidden; }
+        .gradient-text {
+            background: linear-gradient(90deg, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glass-morphism {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-950 via-purple-950 to-slate-900 text-white min-h-screen">
+    
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute top-20 left-10 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style="animation-duration: 4s;"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl animate-pulse" style="animation-duration: 6s;"></div>
+    </div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+        <a href="saracai-final.html#agents" class="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 mb-8 transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Zurück zur Übersicht
+        </a>
+
+        <div class="text-center mb-12 sm:mb-16">
+            <div class="inline-flex items-center justify-center w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-purple-500 to-pink-500 rounded-3xl mb-6 shadow-lg shadow-purple-500/50">
+                <svg class="w-12 h-12 sm:w-16 sm:h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+            </div>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 gradient-text">Automation Engine</h1>
+            <p class="text-lg sm:text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto">
+                Automatisiert komplexe Workflows ohne menschliches Eingreifen
+            </p>
+        </div>
+
+        <div class="glass-morphism rounded-3xl p-8 sm:p-12 text-center">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-4 gradient-text">Bereit zu automatisieren?</h2>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+                <a href="saracai-final.html#kontakt" class="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg font-semibold hover:scale-105 transition-transform">
+                    Jetzt Beratung buchen
+                </a>
+                <a href="tel:01636098583" class="px-8 py-4 glass-morphism rounded-lg font-semibold border border-purple-500/50 hover:bg-white/10 transition-colors">
+                    0163 609 8583
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
