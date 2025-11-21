@@ -26,23 +26,109 @@
             padding: 0;
         }
         
-        /* Animations */
+        /* Custom Cursor - Desktop only */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #3b82f6;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.15s ease;
+            mix-blend-mode: screen;
+        }
+        
+        .cursor-follower {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s ease;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.8);
+        }
+        
+        /* Enhanced Animations */
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-15px); }
         }
+        
         @keyframes pulse-glow {
-            0%, 100% { opacity: 1; filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.8)); }
-            50% { opacity: 0.6; filter: drop-shadow(0 0 40px rgba(59, 130, 246, 1)); }
+            0%, 100% { 
+                opacity: 1; 
+                filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.6)); 
+            }
+            50% { 
+                opacity: 0.8; 
+                filter: drop-shadow(0 0 25px rgba(59, 130, 246, 0.8)); 
+            }
         }
+        
         @keyframes slide-up {
             from { transform: translateY(50px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
+        
         @keyframes gradient-shift {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
         }
+        
+        @keyframes holographic {
+            0%, 100% { 
+                text-shadow: 
+                    0 0 10px rgba(59, 130, 246, 0.6),
+                    0 0 20px rgba(59, 130, 246, 0.4),
+                    0 0 30px rgba(139, 92, 246, 0.3);
+            }
+            50% {
+                text-shadow: 
+                    0 0 15px rgba(139, 92, 246, 0.6),
+                    0 0 25px rgba(139, 92, 246, 0.4),
+                    0 0 35px rgba(59, 130, 246, 0.3);
+            }
+        }
+        
+        @keyframes expand-pulse {
+            0% { 
+                transform: scale(0.5); 
+                opacity: 0.8; 
+            }
+            100% { 
+                transform: scale(2.5); 
+                opacity: 0; 
+            }
+        }
+        
+        @keyframes lightning-strike {
+            0%, 100% { opacity: 0; }
+            10% { opacity: 1; }
+            20% { opacity: 0; }
+            30% { opacity: 1; }
+            40%, 100% { opacity: 0; }
+        }
+        
+        @keyframes neon-pulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 5px rgba(59, 130, 246, 0.4),
+                    0 0 10px rgba(59, 130, 246, 0.3),
+                    0 0 20px rgba(59, 130, 246, 0.2),
+                    inset 0 0 10px rgba(59, 130, 246, 0.1);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 10px rgba(139, 92, 246, 0.5),
+                    0 0 20px rgba(139, 92, 246, 0.4),
+                    0 0 30px rgba(139, 92, 246, 0.3),
+                    inset 0 0 15px rgba(139, 92, 246, 0.2);
+            }
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -53,25 +139,32 @@
         .pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
         .slide-up { animation: slide-up 0.8s ease-out forwards; }
         .fade-in { animation: fadeIn 1s ease-in forwards; }
+        .holographic { animation: holographic 6s ease-in-out infinite; }
+        .expand-pulse { animation: expand-pulse 2s ease-out infinite; }
         
         .glass-morphism {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(16px) saturate(180%);
             border: 1px solid rgba(59, 130, 246, 0.2);
+            box-shadow: 
+                0 8px 32px 0 rgba(31, 38, 135, 0.2),
+                inset 0 0 20px rgba(59, 130, 246, 0.05);
         }
         
         .glow-text {
-            text-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 40px rgba(59, 130, 246, 0.6);
+            text-shadow: 
+                0 0 20px rgba(59, 130, 246, 0.6), 
+                0 0 40px rgba(59, 130, 246, 0.4);
         }
         
         .neon-border {
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), inset 0 0 20px rgba(59, 130, 246, 0.1);
+            animation: neon-pulse 3s ease-in-out infinite;
         }
         
         .gradient-text {
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #06b6d4, #3b82f6);
             background-size: 300% 100%;
-            animation: gradient-shift 5s ease infinite;
+            animation: gradient-shift 6s ease infinite;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -81,11 +174,48 @@
             scroll-margin-top: 80px;
         }
 
-        .card-hover {
+        /* Card with Lightning Effect */
+        .card-lightning {
+            position: relative;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
         }
-        .card-hover:hover {
+        
+        .card-lightning:hover {
             transform: translateY(-10px) scale(1.02);
+        }
+        
+        .card-lightning::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+        
+        .card-lightning:hover::before {
+            opacity: 1;
+        }
+        
+        /* Lightning SVG */
+        .lightning {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            pointer-events: none;
+            filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.8));
+        }
+        
+        .card-lightning:hover .lightning {
+            animation: lightning-strike 0.6s ease-out;
         }
 
         .scroll-progress {
@@ -93,9 +223,30 @@
             top: 0;
             left: 0;
             height: 3px;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4);
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #06b6d4);
+            background-size: 300% 100%;
+            animation: gradient-shift 5s ease infinite;
             z-index: 9999;
             transition: width 0.1s ease;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+        
+        /* Explosion container */
+        .explosion-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .explosion {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 2px solid;
+            border-radius: 50%;
+            animation: expand-pulse 2s ease-out;
         }
         
         /* Mobile-specific fixes */
@@ -104,22 +255,40 @@
                 overflow-x: hidden !important;
             }
             
+            .custom-cursor, .cursor-follower {
+                display: none;
+            }
+            
             .container, section, div {
                 max-width: 100vw !important;
+            }
+        }
+        
+        /* Hide default cursor on desktop */
+        @media (min-width: 769px) {
+            body, a, button {
+                cursor: none !important;
             }
         }
     </style>
 </head>
 <body class="bg-gradient-to-br from-slate-950 via-blue-950 to-purple-950 text-white">
     
+    <!-- Custom Cursor (Desktop only) -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+    
+    <!-- Explosion Container -->
+    <div class="explosion-container" id="explosionContainer"></div>
+    
     <!-- Scroll Progress Bar -->
     <div id="scrollProgress" class="scroll-progress" style="width: 0%"></div>
 
-    <!-- Animated Background - FIXED for mobile -->
+    <!-- Smooth Animated Background -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div class="absolute top-20 left-[5%] w-48 sm:w-64 md:w-96 h-48 sm:h-64 md:h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse" style="animation-duration: 4s;"></div>
-        <div class="absolute bottom-20 right-[5%] w-48 sm:w-64 md:w-96 h-48 sm:h-64 md:h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style="animation-duration: 6s; animation-delay: 1s;"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 sm:w-64 md:w-96 h-48 sm:h-64 md:h-96 bg-cyan-500/15 rounded-full blur-3xl animate-pulse" style="animation-duration: 5s; animation-delay: 2s;"></div>
+        <div class="absolute top-20 left-[10%] w-80 md:w-96 h-80 md:h-96 bg-blue-500/15 rounded-full blur-3xl animate-pulse" style="animation-duration: 8s;"></div>
+        <div class="absolute bottom-20 right-[10%] w-80 md:w-96 h-80 md:h-96 bg-purple-500/15 rounded-full blur-3xl animate-pulse" style="animation-duration: 10s; animation-delay: 2s;"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 md:w-[500px] h-96 md:h-[500px] bg-cyan-500/10 rounded-full blur-3xl animate-pulse" style="animation-duration: 12s; animation-delay: 4s;"></div>
     </div>
 
     <!-- Navigation -->
@@ -127,7 +296,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <svg viewBox="0 0 120 120" class="w-10 h-10 pulse-glow flex-shrink-0" xmlns="http://www.w3.org/2000/svg">
+                    <svg viewBox="0 0 120 120" class="w-10 h-10 pulse-glow float-animation flex-shrink-0" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
@@ -149,33 +318,22 @@
                         <line x1="85" y1="50" x2="75" y2="75" stroke="url(#logoGrad)" stroke-width="2" opacity="0.6"/>
                         <line x1="45" y1="75" x2="60" y2="90" stroke="url(#logoGrad)" stroke-width="2" opacity="0.6"/>
                         <line x1="75" y1="75" x2="60" y2="90" stroke="url(#logoGrad)" stroke-width="2" opacity="0.6"/>
-                        <line x1="35" y1="50" x2="85" y2="50" stroke="url(#logoGrad)" stroke-width="1.5" opacity="0.4"/>
-                        <circle cx="60" cy="60" r="8" fill="url(#logoGrad)" />
-                        <text x="60" y="65" font-family="Arial" font-size="10" font-weight="bold" fill="white" text-anchor="middle">AI</text>
                     </svg>
-                    <span class="text-xl sm:text-2xl font-bold gradient-text">
-                        SaracAI
-                    </span>
+                    <span class="text-2xl font-bold gradient-text">SaracAI</span>
                 </div>
                 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center gap-8">
-                    <a href="#home" class="hover:text-blue-400 transition-colors">Home</a>
-                    <a href="#agents" class="hover:text-blue-400 transition-colors">KI-Agenten</a>
-                    <a href="#vorteile" class="hover:text-blue-400 transition-colors">Vorteile</a>
-                    <a href="#technologie" class="hover:text-blue-400 transition-colors">Technologie</a>
-                    <a href="#kontakt" class="hover:text-blue-400 transition-colors">Kontakt</a>
-                </div>
-
-                <!-- CTA Button Desktop -->
-                <div class="hidden md:block">
-                    <a href="#kontakt" class="px-6 py-2 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all duration-300">
-                        Beratung buchen
+                    <a href="#vorteile" class="hover:text-cyan-400 transition-all duration-300 hover:scale-105 font-medium">Vorteile</a>
+                    <a href="#produkte" class="hover:text-cyan-400 transition-all duration-300 hover:scale-105 font-medium">Produkte</a>
+                    <a href="#technologie" class="hover:text-cyan-400 transition-all duration-300 hover:scale-105 font-medium">Technologie</a>
+                    <a href="#kontakt" class="px-6 py-3 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 rounded-lg font-semibold neon-border hover:scale-105 transition-all duration-300">
+                        Kontakt
                     </a>
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button class="md:hidden text-white flex-shrink-0" onclick="toggleMobileMenu()">
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 hover:bg-white/10 rounded-lg transition-colors">
                     <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -186,253 +344,71 @@
             </div>
 
             <!-- Mobile Menu -->
-            <div id="mobileMenu" class="hidden md:hidden pt-4 pb-2 flex flex-col gap-4">
-                <a href="#home" class="hover:text-blue-400 transition-colors" onclick="toggleMobileMenu()">Home</a>
-                <a href="#agents" class="hover:text-blue-400 transition-colors" onclick="toggleMobileMenu()">KI-Agenten</a>
-                <a href="#vorteile" class="hover:text-blue-400 transition-colors" onclick="toggleMobileMenu()">Vorteile</a>
-                <a href="#technologie" class="hover:text-blue-400 transition-colors" onclick="toggleMobileMenu()">Technologie</a>
-                <a href="#kontakt" class="hover:text-blue-400 transition-colors" onclick="toggleMobileMenu()">Kontakt</a>
+            <div id="mobileMenu" class="hidden md:hidden mt-4 pt-4 border-t border-blue-500/30">
+                <div class="flex flex-col gap-4">
+                    <a href="#vorteile" class="hover:text-cyan-400 transition-colors py-2">Vorteile</a>
+                    <a href="#produkte" class="hover:text-cyan-400 transition-colors py-2">Produkte</a>
+                    <a href="#technologie" class="hover:text-cyan-400 transition-colors py-2">Technologie</a>
+                    <a href="#kontakt" class="px-6 py-3 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 rounded-lg font-semibold text-center neon-border">
+                        Kontakt
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6">
-        
-        <div class="relative z-10 w-full max-w-6xl mx-auto text-center">
-            <div class="mb-8 flex justify-center fade-in">
-                <svg viewBox="0 0 120 120" class="w-32 h-32 md:w-40 md:h-40 pulse-glow float-animation" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="heroLogo" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
-                            <stop offset="50%" style="stop-color:#8b5cf6;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <circle cx="60" cy="60" r="45" fill="none" stroke="url(#heroLogo)" stroke-width="2" opacity="0.3"/>
-                    <circle cx="60" cy="60" r="35" fill="none" stroke="url(#heroLogo)" stroke-width="2" opacity="0.4"/>
-                    <circle cx="60" cy="30" r="6" fill="url(#heroLogo)" />
-                    <circle cx="35" cy="50" r="5" fill="url(#heroLogo)" />
-                    <circle cx="85" cy="50" r="5" fill="url(#heroLogo)" />
-                    <circle cx="45" cy="75" r="5" fill="url(#heroLogo)" />
-                    <circle cx="75" cy="75" r="5" fill="url(#heroLogo)" />
-                    <circle cx="60" cy="90" r="6" fill="url(#heroLogo)" />
-                    <line x1="60" y1="30" x2="35" y2="50" stroke="url(#heroLogo)" stroke-width="2" opacity="0.6"/>
-                    <line x1="60" y1="30" x2="85" y2="50" stroke="url(#heroLogo)" stroke-width="2" opacity="0.6"/>
-                    <line x1="35" y1="50" x2="45" y2="75" stroke="url(#heroLogo)" stroke-width="2" opacity="0.6"/>
-                    <line x1="85" y1="50" x2="75" y2="75" stroke="url(#heroLogo)" stroke-width="2" opacity="0.6"/>
-                    <line x1="45" y1="75" x2="60" y2="90" stroke="url(#heroLogo)" stroke-width="2" opacity="0.6"/>
-                    <line x1="75" y1="75" x2="60" y2="90" stroke="url(#heroLogo)" stroke-width="2" opacity="0.6"/>
-                    <line x1="35" y1="50" x2="85" y2="50" stroke="url(#heroLogo)" stroke-width="1.5" opacity="0.4"/>
-                    <circle cx="60" cy="60" r="8" fill="url(#heroLogo)" />
-                    <text x="60" y="65" font-family="Arial" font-size="10" font-weight="bold" fill="white" text-anchor="middle">AI</text>
-                </svg>
+    <section class="relative min-h-screen flex items-center justify-center px-4 sm:px-6 pt-20">
+        <div class="relative z-10 text-center max-w-5xl mx-auto">
+            <div class="mb-8 slide-up" style="animation-delay: 0.2s;">
+                <span class="px-6 py-3 bg-gradient-to-r from-blue-600/30 via-purple-600/30 to-cyan-600/30 rounded-full text-sm font-semibold border border-blue-500/50 inline-block neon-border">
+                    🚀 Next-Generation AI Technology
+                </span>
             </div>
             
-            <h1 class="text-4xl sm:text-6xl md:text-8xl font-bold mb-6 gradient-text glow-text slide-up" style="word-wrap: break-word;">
-                SaracAI
+            <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-8 holographic slide-up" style="animation-delay: 0.4s;">
+                Intelligente KI-Agenten<br>
+                <span class="gradient-text glow-text">für Ihr Business</span>
             </h1>
             
-            <p class="text-xl sm:text-2xl md:text-4xl mb-4 text-blue-300 font-light slide-up" style="animation-delay: 0.2s;">
-                Next-Generation KI-Agenten
+            <p class="text-lg sm:text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto slide-up" style="animation-delay: 0.6s;">
+                Automatisieren Sie Prozesse, analysieren Sie Daten in Echtzeit und treffen Sie bessere Entscheidungen mit unseren hochmodernen KI-Lösungen.
             </p>
             
-            <p class="text-base sm:text-lg md:text-2xl mb-12 text-slate-300 max-w-4xl mx-auto slide-up" style="animation-delay: 0.4s;">
-                Automatisierung, die denkt. Intelligenz, die handelt. Business, das wächst.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row gap-4 justify-center slide-up" style="animation-delay: 0.6s;">
-                <a href="#agents" class="group px-6 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 rounded-lg font-semibold neon-border hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 relative overflow-hidden">
-                    <span class="relative z-10">KI-Agenten entdecken</span>
-                    <svg class="w-5 h-5 relative z-10 group-hover:translate-x-2 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16 slide-up" style="animation-delay: 0.8s;">
+                <a href="#kontakt" class="group px-8 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 rounded-lg font-semibold text-lg neon-border hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+                    Jetzt starten
+                    <svg class="w-5 h-5 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                     </svg>
-                    <div class="absolute inset-0 bg-gradient-to-r from-cyan-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </a>
-                <a href="#kontakt" class="px-6 sm:px-10 py-4 sm:py-5 glass-morphism rounded-lg font-semibold hover:bg-white/10 transition-all duration-300 border border-blue-500/50 hover:border-cyan-400 hover:scale-105">
-                    Beratung buchen
+                <a href="#produkte" class="px-8 py-4 glass-morphism rounded-lg font-semibold text-lg hover:bg-white/10 transition-all duration-300 border border-blue-500/50 hover:border-cyan-400 hover:scale-105">
+                    Mehr erfahren
                 </a>
             </div>
 
-            <!-- Trust Indicators -->
-            <div class="mt-16 slide-up" style="animation-delay: 0.8s;">
-                <p class="text-sm text-slate-400 mb-4">Vertraut von führenden Unternehmen</p>
-                <div class="flex flex-wrap justify-center gap-4 sm:gap-8 items-center">
-                    <div class="px-4 sm:px-6 py-2 glass-morphism rounded-lg text-base sm:text-lg font-bold text-blue-300 border border-blue-500/30">ENTERPRISE</div>
-                    <div class="px-4 sm:px-6 py-2 glass-morphism rounded-lg text-base sm:text-lg font-bold text-purple-300 border border-purple-500/30">MITTELSTAND</div>
+            <!-- Animated Stats -->
+            <div class="grid grid-cols-3 gap-4 sm:gap-8 max-w-3xl mx-auto slide-up" style="animation-delay: 1s;">
+                <div class="glass-morphism p-4 sm:p-6 rounded-xl neon-border">
+                    <div class="text-3xl sm:text-4xl font-bold gradient-text mb-2">98%</div>
+                    <div class="text-xs sm:text-sm text-slate-400">Automatisierung</div>
                 </div>
-            </div>
-
-            <!-- Powered by Badge -->
-            <div class="mt-8 slide-up" style="animation-delay: 1s;">
-                <div class="inline-flex items-center gap-2 px-4 py-2 glass-morphism rounded-full text-sm border border-cyan-500/30">
-                    <svg class="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                    </svg>
-                    <span class="text-cyan-400">Powered by Advanced AI</span>
+                <div class="glass-morphism p-4 sm:p-6 rounded-xl neon-border">
+                    <div class="text-3xl sm:text-4xl font-bold gradient-text mb-2">24/7</div>
+                    <div class="text-xs sm:text-sm text-slate-400">Verfügbarkeit</div>
+                </div>
+                <div class="glass-morphism p-4 sm:p-6 rounded-xl neon-border">
+                    <div class="text-3xl sm:text-4xl font-bold gradient-text mb-2">-60%</div>
+                    <div class="text-xs sm:text-sm text-slate-400">Kosten</div>
                 </div>
             </div>
         </div>
 
+        <!-- Scroll Indicator -->
         <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
             </svg>
-        </div>
-    </section>
-
-    <!-- KI-Agenten Section -->
-    <section id="agents" class="relative py-20 px-4 sm:px-6">
-        <div class="relative z-10 max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <div class="inline-flex items-center gap-2 px-4 py-2 glass-morphism rounded-full text-sm mb-6 border border-cyan-500/30">
-                    <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                    </svg>
-                    <span class="text-cyan-400">Powered by Advanced AI</span>
-                </div>
-                <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 gradient-text">Unsere KI-Agenten</h2>
-                <p class="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto">
-                    Autonome Intelligenz, die lernt, denkt und handelt
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                <!-- Conversational AI -->
-                <a href="conversational-ai.html" class="group glass-morphism rounded-3xl p-6 sm:p-8 card-hover relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-cyan-500/20 transition-all"></div>
-                    <div class="relative z-10">
-                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-cyan-500/50">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
-                            </svg>
-                        </div>
-                        <div class="flex items-center gap-2 mb-3">
-                            <h3 class="text-2xl font-bold">Conversational AI</h3>
-                            <span class="px-2 py-1 bg-green-500/20 rounded-full text-xs text-green-400 border border-green-500/50">Live</span>
-                        </div>
-                        <p class="text-slate-400 mb-6">
-                            Intelligente Chatbots mit natürlicher Sprachverarbeitung für nahtlose Kundenkommunikation
-                        </p>
-                        <ul class="space-y-2 mb-6">
-                            <li class="flex items-center gap-2 text-sm text-slate-300">
-                                <svg class="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                24/7 Kundensupport
-                            </li>
-                            <li class="flex items-center gap-2 text-sm text-slate-300">
-                                <svg class="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Mehrsprachig
-                            </li>
-                            <li class="flex items-center gap-2 text-sm text-slate-300">
-                                <svg class="w-4 h-4 text-cyan-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Emotionserkennung
-                            </li>
-                        </ul>
-                        <div class="flex items-center gap-2 text-cyan-400 group-hover:gap-4 transition-all">
-                            <span class="font-semibold">Mehr erfahren</span>
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                            </svg>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Automation Engine -->
-                <a href="automation-engine.html" class="group glass-morphism rounded-3xl p-6 sm:p-8 card-hover relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/20 transition-all"></div>
-                    <div class="relative z-10">
-                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-purple-500/50">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                            </svg>
-                        </div>
-                        <div class="flex items-center gap-2 mb-3">
-                            <h3 class="text-2xl font-bold">Automation Engine</h3>
-                            <span class="px-2 py-1 bg-yellow-500/20 rounded-full text-xs text-yellow-400 border border-yellow-500/50">Coming Soon</span>
-                        </div>
-                        <p class="text-slate-400 mb-6">
-                            Automatisiert komplexe Workflows und Geschäftsprozesse ohne menschliches Eingreifen
-                        </p>
-                        <ul class="space-y-2 mb-6">
-                            <li class="flex items-center gap-2 text-sm text-slate-300">
-                                <svg class="w-4 h-4 text-purple-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Workflow-Automation
-                            </li>
-                            <li class="flex items-center gap-2 text-sm text-slate-300">
-                                <svg class="w-4 h-4 text-purple-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Prozessoptimierung
-                            </li>
-                            <li class="flex items-center gap-2 text-sm text-slate-300">
-                                <svg class="w-4 h-4 text-purple-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Fehlerreduktion
-                            </li>
-                        </ul>
-                        <div class="flex items-center gap-2 text-purple-400 group-hover:gap-4 transition-all">
-                            <span class="font-semibold">Mehr erfahren</span>
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                            </svg>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Predictive Analytics -->
-                <a href="predictive-analytics.html" class="group glass-morphism rounded-3xl p-6 sm:p-8 card-hover relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-blue-500/20 transition-all"></div>
-                    <div class="relative z-10">
-                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-blue-500/50">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                            </svg>
-                        </div>
-                        <div class="flex items-center gap-2 mb-3">
-                            <h3 class="text-2xl font-bold">Predictive Analytics</h3>
-                            <span class="px-2 py-1 bg-blue-500/20 rounded-full text-xs text-blue-400 border border-blue-500/50">Beta</span>
-                        </div>
-                        <p class="text-slate-400 mb-6">
-                            Vorhersage von Trends und Mustern durch Deep Learning und Datenanalyse
-                        </p>
-                        <ul class="space-y-2 mb-6">
-                            <li class="flex items-center gap-2 text-sm text-slate-300">
-                                <svg class="w-4 h-4 text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Trendvorhersage
-                            </li>
-                            <li class="flex items-center gap-2 text-sm text-slate-300">
-                                <svg class="w-4 h-4 text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Anomalie-Erkennung
-                            </li>
-                            <li class="flex items-center gap-2 text-sm text-slate-300">
-                                <svg class="w-4 h-4 text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Datengetriebene Insights
-                            </li>
-                        </ul>
-                        <div class="flex items-center gap-2 text-blue-400 group-hover:gap-4 transition-all">
-                            <span class="font-semibold">Mehr erfahren</span>
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                            </svg>
-                        </div>
-                    </div>
-                </a>
-            </div>
         </div>
     </section>
 
@@ -440,84 +416,250 @@
     <section id="vorteile" class="relative py-20 px-4 sm:px-6">
         <div class="relative z-10 max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 gradient-text">Warum SaracAI?</h2>
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 holographic">
+                    <span class="gradient-text">Warum SaracAI?</span>
+                </h2>
                 <p class="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto">
-                    Die Zukunft der Geschäftsprozesse beginnt heute
+                    Revolutionieren Sie Ihr Unternehmen mit Technologie der nächsten Generation
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                <div class="glass-morphism rounded-3xl p-6 sm:p-8">
-                    <div class="w-14 h-14 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card-lightning glass-morphism rounded-2xl p-8 relative overflow-hidden">
+                    <!-- Lightning SVG -->
+                    <svg class="lightning w-32 h-32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" fill="url(#lightningGrad)" stroke="url(#lightningGrad)" stroke-width="0.5"/>
+                        <defs>
+                            <linearGradient id="lightningGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mb-6 pulse-glow float-animation">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 glow-text">Blitzschnelle Implementierung</h3>
+                        <p class="text-slate-300 mb-4">In wenigen Tagen einsatzbereit. Keine komplexe IT-Integration notwendig.</p>
+                        <ul class="space-y-2 text-sm text-slate-400">
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Plug & Play Setup
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                API-first Architecture
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Zero Downtime Updates
+                            </li>
+                        </ul>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-cyan-400">Schneller ROI</h3>
-                    <p class="text-slate-400">
-                        Messbare Ergebnisse innerhalb von Wochen, nicht Monaten. Unsere KI-Agenten amortisieren sich schnell durch Effizienzsteigerung.
-                    </p>
                 </div>
 
-                <div class="glass-morphism rounded-3xl p-6 sm:p-8">
-                    <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                        </svg>
+                <div class="card-lightning glass-morphism rounded-2xl p-8 relative overflow-hidden">
+                    <!-- Lightning SVG -->
+                    <svg class="lightning w-32 h-32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" fill="url(#lightningGrad2)" stroke="url(#lightningGrad2)" stroke-width="0.5"/>
+                        <defs>
+                            <linearGradient id="lightningGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6 pulse-glow float-animation" style="animation-delay: 0.5s;">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 glow-text">Enterprise-Grade Sicherheit</h3>
+                        <p class="text-slate-300 mb-4">DSGVO-konform, verschlüsselt und auf deutschen Servern gehostet.</p>
+                        <ul class="space-y-2 text-sm text-slate-400">
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                End-to-End Verschlüsselung
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                ISO 27001 Zertifiziert
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                24/7 Security Monitoring
+                            </li>
+                        </ul>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-purple-400">Höchste Sicherheit</h3>
-                    <p class="text-slate-400">
-                        Enterprise-Grade Security mit Ende-zu-Ende-Verschlüsselung. Ihre Daten bleiben geschützt und DSGVO-konform.
-                    </p>
                 </div>
 
-                <div class="glass-morphism rounded-3xl p-6 sm:p-8">
-                    <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                        </svg>
+                <div class="card-lightning glass-morphism rounded-2xl p-8 relative overflow-hidden">
+                    <!-- Lightning SVG -->
+                    <svg class="lightning w-32 h-32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" fill="url(#lightningGrad3)" stroke="url(#lightningGrad3)" stroke-width="0.5"/>
+                        <defs>
+                            <linearGradient id="lightningGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center mb-6 pulse-glow float-animation" style="animation-delay: 1s;">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 glow-text">Messbare ROI</h3>
+                        <p class="text-slate-300 mb-4">Durchschnittlich 60% Kosteneinsparung im ersten Jahr.</p>
+                        <ul class="space-y-2 text-sm text-slate-400">
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Real-time Analytics
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Performance Tracking
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Predictive Insights
+                            </li>
+                        </ul>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-blue-400">Kontinuierliches Lernen</h3>
-                    <p class="text-slate-400">
-                        Unsere KI-Agenten lernen aus jeder Interaktion und werden täglich besser. Automatische Optimierung inklusive.
-                    </p>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <div class="glass-morphism rounded-3xl p-6 sm:p-8">
-                    <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 text-green-400">Cloud-Native</h3>
-                    <p class="text-slate-400">
-                        Skaliert automatisch mit Ihrem Business. Keine Hardware, keine Installation, keine Wartung erforderlich.
-                    </p>
-                </div>
+    <!-- Produkte Section -->
+    <section id="produkte" class="relative py-20 px-4 sm:px-6">
+        <div class="relative z-10 max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 holographic">
+                    <span class="gradient-text">Unsere KI-Agenten</span>
+                </h2>
+                <p class="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto">
+                    Spezialisierte Lösungen für jeden Geschäftsbereich
+                </p>
+            </div>
 
-                <div class="glass-morphism rounded-3xl p-6 sm:p-8">
-                    <div class="w-14 h-14 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
+            <div class="grid md:grid-cols-3 gap-8">
+                <a href="conversational-ai.html" class="card-lightning glass-morphism rounded-2xl p-8 group hover:border-cyan-400 transition-all duration-300 block relative overflow-hidden">
+                    <!-- Lightning SVG -->
+                    <svg class="lightning w-32 h-32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" fill="url(#lightningGrad4)" stroke="url(#lightningGrad4)" stroke-width="0.5"/>
+                        <defs>
+                            <linearGradient id="lightningGrad4" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-cyan-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mb-6 pulse-glow float-animation group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 glow-text group-hover:text-cyan-400 transition-colors">Conversational AI</h3>
+                        <p class="text-slate-300 mb-6">Intelligente Chatbots und virtuelle Assistenten für nahtlose Kundenkommunikation.</p>
+                        <div class="flex items-center text-cyan-400 font-semibold group-hover:translate-x-2 transition-transform">
+                            Mehr erfahren
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-orange-400">Persönlicher Support</h3>
-                    <p class="text-slate-400">
-                        Dedizierter Account Manager und 24/7 technischer Support. Wir sind immer für Sie da.
-                    </p>
-                </div>
+                </a>
 
-                <div class="glass-morphism rounded-3xl p-6 sm:p-8">
-                    <div class="w-14 h-14 bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                        </svg>
+                <a href="automation-engine.html" class="card-lightning glass-morphism rounded-2xl p-8 group hover:border-purple-400 transition-all duration-300 block relative overflow-hidden">
+                    <!-- Lightning SVG -->
+                    <svg class="lightning w-32 h-32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" fill="url(#lightningGrad5)" stroke="url(#lightningGrad5)" stroke-width="0.5"/>
+                        <defs>
+                            <linearGradient id="lightningGrad5" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-pink-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6 pulse-glow float-animation group-hover:scale-110 transition-transform duration-300" style="animation-delay: 0.5s;">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 glow-text group-hover:text-purple-400 transition-colors">Automation Engine</h3>
+                        <p class="text-slate-300 mb-6">Automatisieren Sie komplexe Workflows und steigern Sie die Effizienz um das 10-fache.</p>
+                        <div class="flex items-center text-purple-400 font-semibold group-hover:translate-x-2 transition-transform">
+                            Mehr erfahren
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-pink-400">Compliance-Ready</h3>
-                    <p class="text-slate-400">
-                        Erfüllt alle regulatorischen Anforderungen. DSGVO, ISO 27001 und branchenspezifische Standards inklusive.
-                    </p>
-                </div>
+                </a>
+
+                <a href="predictive-analytics.html" class="card-lightning glass-morphism rounded-2xl p-8 group hover:border-pink-400 transition-all duration-300 block relative overflow-hidden">
+                    <!-- Lightning SVG -->
+                    <svg class="lightning w-32 h-32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" fill="url(#lightningGrad6)" stroke="url(#lightningGrad6)" stroke-width="0.5"/>
+                        <defs>
+                            <linearGradient id="lightningGrad6" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#ec4899;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#f97316;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    
+                    <div class="absolute inset-0 bg-gradient-to-br from-pink-600/10 to-orange-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-orange-500 rounded-2xl flex items-center justify-center mb-6 pulse-glow float-animation group-hover:scale-110 transition-transform duration-300" style="animation-delay: 1s;">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 glow-text group-hover:text-pink-400 transition-colors">Predictive Analytics</h3>
+                        <p class="text-slate-300 mb-6">Vorausschauende Datenanalyse für fundierte strategische Entscheidungen.</p>
+                        <div class="flex items-center text-pink-400 font-semibold group-hover:translate-x-2 transition-transform">
+                            Mehr erfahren
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -526,112 +668,99 @@
     <section id="technologie" class="relative py-20 px-4 sm:px-6">
         <div class="relative z-10 max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 gradient-text">Modernste Technologie</h2>
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 holographic">
+                    <span class="gradient-text">Cutting-Edge Technologie</span>
+                </h2>
                 <p class="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto">
-                    Gebaut auf den neuesten KI-Modellen und bewährten Enterprise-Technologien
+                    Basierend auf den neuesten KI-Modellen und modernsten Tech-Stack
                 </p>
             </div>
 
-            <div class="grid lg:grid-cols-2 gap-8 mb-12">
-                <div class="glass-morphism rounded-3xl p-8">
-                    <h3 class="text-3xl font-bold mb-6 gradient-text">KI & Machine Learning</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
-                                </svg>
+            <div class="glass-morphism rounded-3xl p-8 sm:p-12 mb-12">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-3xl font-bold mb-6 glow-text">Modernster Tech-Stack</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center flex-shrink-0 pulse-glow">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold mb-2">Large Language Models</h4>
+                                    <p class="text-slate-400">GPT-4, Claude, LLaMA und proprietäre Modelle für optimale Performance</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-2">Large Language Models (LLMs)</h4>
-                                <p class="text-slate-400 text-sm">GPT-4, Claude 3 und weitere State-of-the-Art Modelle für natürliche Sprachverarbeitung</p>
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center flex-shrink-0 pulse-glow">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold mb-2">Advanced ML Pipeline</h4>
+                                    <p class="text-slate-400">TensorFlow, PyTorch für Training und Fine-Tuning</p>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-2">Deep Learning</h4>
-                                <p class="text-slate-400 text-sm">TensorFlow und PyTorch für komplexe Mustererkennung und Vorhersagemodelle</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-2">Reinforcement Learning</h4>
-                                <p class="text-slate-400 text-sm">Selbstlernende Systeme, die sich kontinuierlich durch Feedback verbessern</p>
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center flex-shrink-0 pulse-glow">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold mb-2">Cloud-Native Architecture</h4>
+                                    <p class="text-slate-400">Kubernetes, Docker für maximale Skalierbarkeit</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="glass-morphism rounded-3xl p-8">
-                    <h3 class="text-3xl font-bold mb-6 gradient-text">Enterprise Infrastructure</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-2">Cloud-Native Architecture</h4>
-                                <p class="text-slate-400 text-sm">AWS, Azure und GCP für höchste Verfügbarkeit und Skalierbarkeit</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 bg-yellow-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-2">Enterprise Security</h4>
-                                <p class="text-slate-400 text-sm">Ende-zu-Ende-Verschlüsselung, SOC 2 und ISO 27001 zertifiziert</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-2">Real-time Processing</h4>
-                                <p class="text-slate-400 text-sm">Microsecond-latency Datenverarbeitung für sofortige Ergebnisse</p>
-                            </div>
+                    <div class="relative">
+                        <div class="aspect-square glass-morphism rounded-3xl p-8 flex items-center justify-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-cyan-600/20"></div>
+                            <svg viewBox="0 0 200 200" class="w-full h-full pulse-glow float-animation" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="techGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+                                        <stop offset="50%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="100" cy="100" r="80" fill="none" stroke="url(#techGrad)" stroke-width="2" opacity="0.3"/>
+                                <circle cx="100" cy="100" r="60" fill="none" stroke="url(#techGrad)" stroke-width="2" opacity="0.4"/>
+                                <circle cx="100" cy="100" r="40" fill="none" stroke="url(#techGrad)" stroke-width="2" opacity="0.5"/>
+                                <circle cx="100" cy="100" r="20" fill="url(#techGrad)" />
+                                <circle cx="100" cy="40" r="8" fill="url(#techGrad)" />
+                                <circle cx="40" cy="100" r="8" fill="url(#techGrad)" />
+                                <circle cx="160" cy="100" r="8" fill="url(#techGrad)" />
+                                <circle cx="100" cy="160" r="8" fill="url(#techGrad)" />
+                                <line x1="100" y1="100" x2="100" y2="40" stroke="url(#techGrad)" stroke-width="2" opacity="0.6"/>
+                                <line x1="100" y1="100" x2="40" y2="100" stroke="url(#techGrad)" stroke-width="2" opacity="0.6"/>
+                                <line x1="100" y1="100" x2="160" y2="100" stroke="url(#techGrad)" stroke-width="2" opacity="0.6"/>
+                                <line x1="100" y1="100" x2="100" y2="160" stroke="url(#techGrad)" stroke-width="2" opacity="0.6"/>
+                            </svg>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Tech Stack Badges -->
             <div class="glass-morphism rounded-3xl p-8">
-                <h3 class="text-2xl font-bold mb-6 text-center">Technologie-Stack</h3>
-                <div class="flex flex-wrap justify-center gap-3">
-                    <span class="px-4 py-2 bg-cyan-500/20 rounded-full text-sm text-cyan-400 border border-cyan-500/50">GPT-4</span>
-                    <span class="px-4 py-2 bg-blue-500/20 rounded-full text-sm text-blue-400 border border-blue-500/50">Claude 3</span>
-                    <span class="px-4 py-2 bg-purple-500/20 rounded-full text-sm text-purple-400 border border-purple-500/50">TensorFlow</span>
-                    <span class="px-4 py-2 bg-pink-500/20 rounded-full text-sm text-pink-400 border border-pink-500/50">PyTorch</span>
-                    <span class="px-4 py-2 bg-green-500/20 rounded-full text-sm text-green-400 border border-green-500/50">Kubernetes</span>
-                    <span class="px-4 py-2 bg-yellow-500/20 rounded-full text-sm text-yellow-400 border border-yellow-500/50">Docker</span>
-                    <span class="px-4 py-2 bg-cyan-500/20 rounded-full text-sm text-cyan-400 border border-cyan-500/50">AWS</span>
-                    <span class="px-4 py-2 bg-blue-500/20 rounded-full text-sm text-blue-400 border border-blue-500/50">Azure</span>
-                    <span class="px-4 py-2 bg-purple-500/20 rounded-full text-sm text-purple-400 border border-purple-500/50">GCP</span>
-                    <span class="px-4 py-2 bg-pink-500/20 rounded-full text-sm text-pink-400 border border-pink-500/50">PostgreSQL</span>
-                    <span class="px-4 py-2 bg-green-500/20 rounded-full text-sm text-green-400 border border-green-500/50">Redis</span>
-                    <span class="px-4 py-2 bg-yellow-500/20 rounded-full text-sm text-yellow-400 border border-yellow-500/50">Elasticsearch</span>
+                <h3 class="text-2xl font-bold mb-6 text-center glow-text">Unser Tech-Stack</h3>
+                <div class="flex flex-wrap gap-3 justify-center">
+                    <span class="px-4 py-2 bg-blue-500/20 rounded-full text-sm text-blue-400 border border-blue-500/50 hover:scale-105 transition-transform neon-border">Python</span>
+                    <span class="px-4 py-2 bg-cyan-500/20 rounded-full text-sm text-cyan-400 border border-cyan-500/50 hover:scale-105 transition-transform neon-border">TensorFlow</span>
+                    <span class="px-4 py-2 bg-purple-500/20 rounded-full text-sm text-purple-400 border border-purple-500/50 hover:scale-105 transition-transform neon-border">PyTorch</span>
+                    <span class="px-4 py-2 bg-pink-500/20 rounded-full text-sm text-pink-400 border border-pink-500/50 hover:scale-105 transition-transform neon-border">React</span>
+                    <span class="px-4 py-2 bg-green-500/20 rounded-full text-sm text-green-400 border border-green-500/50 hover:scale-105 transition-transform neon-border">Node.js</span>
+                    <span class="px-4 py-2 bg-orange-500/20 rounded-full text-sm text-orange-400 border border-orange-500/50 hover:scale-105 transition-transform neon-border">FastAPI</span>
+                    <span class="px-4 py-2 bg-yellow-500/20 rounded-full text-sm text-yellow-400 border border-yellow-500/50 hover:scale-105 transition-transform neon-border">Docker</span>
+                    <span class="px-4 py-2 bg-cyan-500/20 rounded-full text-sm text-cyan-400 border border-cyan-500/50 hover:scale-105 transition-transform neon-border">AWS</span>
+                    <span class="px-4 py-2 bg-blue-500/20 rounded-full text-sm text-blue-400 border border-blue-500/50 hover:scale-105 transition-transform neon-border">Azure</span>
+                    <span class="px-4 py-2 bg-purple-500/20 rounded-full text-sm text-purple-400 border border-purple-500/50 hover:scale-105 transition-transform neon-border">GCP</span>
+                    <span class="px-4 py-2 bg-pink-500/20 rounded-full text-sm text-pink-400 border border-pink-500/50 hover:scale-105 transition-transform neon-border">PostgreSQL</span>
+                    <span class="px-4 py-2 bg-green-500/20 rounded-full text-sm text-green-400 border border-green-500/50 hover:scale-105 transition-transform neon-border">Redis</span>
+                    <span class="px-4 py-2 bg-yellow-500/20 rounded-full text-sm text-yellow-400 border border-yellow-500/50 hover:scale-105 transition-transform neon-border">Elasticsearch</span>
                 </div>
             </div>
         </div>
@@ -640,8 +769,10 @@
     <!-- Kontakt Section -->
     <section id="kontakt" class="relative py-20 px-4 sm:px-6">
         <div class="relative z-10 max-w-4xl mx-auto">
-            <div class="glass-morphism rounded-3xl p-8 sm:p-12 text-center">
-                <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 gradient-text">Lassen Sie uns sprechen</h2>
+            <div class="glass-morphism rounded-3xl p-8 sm:p-12 text-center neon-border">
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 holographic">
+                    <span class="gradient-text">Lassen Sie uns sprechen</span>
+                </h2>
                 <p class="text-lg sm:text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
                     Bereit, Ihr Unternehmen mit KI-Agenten zu transformieren? Vereinbaren Sie jetzt ein kostenloses Beratungsgespräch.
                 </p>
@@ -679,7 +810,7 @@
             <div class="grid md:grid-cols-4 gap-8 mb-8">
                 <div>
                     <div class="flex items-center gap-3 mb-4">
-                        <svg viewBox="0 0 120 120" class="w-10 h-10 pulse-glow" xmlns="http://www.w3.org/2000/svg">
+                        <svg viewBox="0 0 120 120" class="w-10 h-10 pulse-glow float-animation" xmlns="http://www.w3.org/2000/svg">
                             <defs>
                                 <linearGradient id="footerLogo" x1="0%" y1="0%" x2="100%" y2="100%">
                                     <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
@@ -734,6 +865,70 @@
     </footer>
 
     <script>
+        // Custom Cursor (Desktop only)
+        if (window.innerWidth > 768) {
+            const cursor = document.querySelector('.custom-cursor');
+            const follower = document.querySelector('.cursor-follower');
+            
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+            let followerX = 0, followerY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            function updateCursor() {
+                // Smooth cursor movement
+                cursorX += (mouseX - cursorX) * 0.3;
+                cursorY += (mouseY - cursorY) * 0.3;
+                
+                followerX += (mouseX - followerX) * 0.15;
+                followerY += (mouseY - followerY) * 0.15;
+                
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                
+                follower.style.left = followerX + 'px';
+                follower.style.top = followerY + 'px';
+
+                requestAnimationFrame(updateCursor);
+            }
+            updateCursor();
+        }
+
+        // Random Explosions
+        const explosionContainer = document.getElementById('explosionContainer');
+        const colors = [
+            'rgba(59, 130, 246, 0.4)',  // blue
+            'rgba(139, 92, 246, 0.4)',  // purple
+            'rgba(6, 182, 212, 0.4)',   // cyan
+            'rgba(236, 72, 153, 0.4)'   // pink
+        ];
+
+        function createExplosion() {
+            const explosion = document.createElement('div');
+            explosion.className = 'explosion';
+            
+            // Random position
+            explosion.style.left = Math.random() * window.innerWidth + 'px';
+            explosion.style.top = Math.random() * window.innerHeight + 'px';
+            
+            // Random color
+            explosion.style.borderColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            explosionContainer.appendChild(explosion);
+            
+            // Remove after animation
+            setTimeout(() => {
+                explosion.remove();
+            }, 2000);
+        }
+
+        // Create explosions at random intervals
+        setInterval(createExplosion, 2000);
+
         // Mobile Menu Toggle
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
