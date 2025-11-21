@@ -5,85 +5,300 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datenschutzerklärung - SaracAI</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { overflow-x: hidden !important; max-width: 100vw; scroll-behavior: smooth; }
+        
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        @keyframes pulse-glow { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+        @keyframes gradient-shift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        
+        .glass-morphism { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(59, 130, 246, 0.2); }
+        .gradient-text { background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4); background-size: 300% 100%; animation: gradient-shift 5s ease infinite; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-hover { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card-hover:hover { transform: translateY(-10px) scale(1.02); }
+        
+        @media (max-width: 768px) {
+            body { font-size: 14px; }
+            h1 { font-size: 2rem !important; }
+            h2 { font-size: 1.75rem !important; }
+            h3 { font-size: 1.5rem !important; }
+        }
+    </style>
+
 </head>
-<body class="bg-gradient-to-br from-slate-950 via-blue-950 to-purple-950 text-white min-h-screen">
-    <div class="max-w-4xl mx-auto px-6 py-20">
-        <a href="saracai-final.html" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 mb-8">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-            </svg>
-            Zurück zur Startseite
-        </a>
-        
-        <h1 class="text-5xl font-bold mb-8 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Datenschutzerklärung</h1>
-        
-        <div class="bg-slate-900/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl p-8 space-y-8">
-            <div>
-                <h2 class="text-2xl font-bold text-blue-400 mb-3">1. Datenschutz auf einen Blick</h2>
-                <h3 class="text-xl font-semibold text-cyan-400 mb-2">Allgemeine Hinweise</h3>
-                <p class="text-slate-300 text-sm leading-relaxed">
-                    Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten 
-                    passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie 
-                    persönlich identifiziert werden können.
-                </p>
-            </div>
-            
-            <div>
-                <h2 class="text-2xl font-bold text-blue-400 mb-3">2. Datenerfassung auf dieser Website</h2>
-                <h3 class="text-xl font-semibold text-cyan-400 mb-2">Wer ist verantwortlich für die Datenerfassung?</h3>
-                <p class="text-slate-300 text-sm leading-relaxed mb-4">
-                    Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. 
-                    Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.
-                </p>
+<body class="bg-gradient-to-br from-slate-950 via-blue-950 to-purple-950 text-white">
+    
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute top-20 left-10 w-64 sm:w-96 h-64 sm:h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+    </div>
+
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-morphism">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <a href="index.html" class="flex items-center gap-3">
+                    <svg viewBox="0 0 40 40" class="w-8 h-8 sm:w-10 sm:h-10" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3b82f6"/>
+                                <stop offset="100%" style="stop-color:#06b6d4"/>
+                            </linearGradient>
+                        </defs>
+                        <circle cx="20" cy="20" r="18" fill="none" stroke="url(#logoGradient)" stroke-width="2"/>
+                        <circle cx="20" cy="20" r="8" fill="url(#logoGradient)"/>
+                    </svg>
+                    <span class="text-lg sm:text-2xl font-bold gradient-text">SaracAI</span>
+                </a>
                 
-                <h3 class="text-xl font-semibold text-cyan-400 mb-2">Wie erfassen wir Ihre Daten?</h3>
-                <p class="text-slate-300 text-sm leading-relaxed">
-                    Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z.B. 
-                    um Daten handeln, die Sie in ein Kontaktformular eingeben oder uns telefonisch mitteilen.
-                </p>
+                <div class="hidden md:flex items-center gap-4 lg:gap-6">
+                    <a href="index.html" class="hover:text-blue-400 transition-colors text-sm lg:text-base">Home</a>
+                    <a href="index.html#agents" class="hover:text-blue-400 transition-colors text-sm lg:text-base">KI-Agenten</a>
+                    <a href="index.html#kontakt" class="px-4 lg:px-6 py-2 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg font-semibold hover:shadow-lg transition-all text-sm lg:text-base">
+                        Beratung buchen
+                    </a>
+                </div>
+
+                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                    <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
             </div>
-            
-            <div>
-                <h2 class="text-2xl font-bold text-blue-400 mb-3">3. Hosting</h2>
-                <p class="text-slate-300 text-sm leading-relaxed">
-                    Diese Website wird bei einem externen Dienstleister gehostet (Hoster). Die personenbezogenen Daten, 
-                    die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert.
-                </p>
-            </div>
-            
-            <div>
-                <h2 class="text-2xl font-bold text-blue-400 mb-3">4. Allgemeine Hinweise und Pflichtinformationen</h2>
-                <h3 class="text-xl font-semibold text-cyan-400 mb-2">Datenschutz</h3>
-                <p class="text-slate-300 text-sm leading-relaxed">
-                    Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten 
-                    vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.
-                </p>
-            </div>
-            
-            <div>
-                <h2 class="text-2xl font-bold text-blue-400 mb-3">5. Kontaktaufnahme</h2>
-                <p class="text-slate-300 text-sm leading-relaxed">
-                    Bei der Kontaktaufnahme mit uns (z.B. per E-Mail oder Telefon) werden die von Ihnen mitgeteilten Daten 
-                    von uns gespeichert, um Ihre Fragen zu bearbeiten.
-                </p>
-            </div>
-            
-            <div>
-                <h2 class="text-2xl font-bold text-blue-400 mb-3">6. Ihre Rechte</h2>
-                <p class="text-slate-300 text-sm leading-relaxed">
-                    Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, 
-                    Datenübertragbarkeit und Widerspruch bezüglich Ihrer gespeicherten Daten.
-                </p>
-            </div>
-            
-            <div class="pt-6 border-t border-slate-700">
-                <p class="text-slate-500 text-sm italic">
-                    Hinweis: Dies ist eine Platzhalter-Datenschutzerklärung. Bitte ersetzen Sie diese durch eine 
-                    rechtssichere, auf Ihr Unternehmen zugeschnittene Datenschutzerklärung. Wir empfehlen die Nutzung 
-                    eines Datenschutz-Generators oder die Beratung durch einen Rechtsanwalt.
-                </p>
+
+            <div id="mobileMenu" class="hidden md:hidden py-4 space-y-4">
+                <a href="index.html" class="block hover:text-blue-400 transition-colors" onclick="toggleMobileMenu()">Home</a>
+                <a href="index.html#agents" class="block hover:text-blue-400 transition-colors" onclick="toggleMobileMenu()">KI-Agenten</a>
+                <a href="index.html#kontakt" class="block px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg font-semibold text-center" onclick="toggleMobileMenu()">Beratung buchen</a>
             </div>
         </div>
-    </div>
+    </nav>
+
+
+    <main class="relative z-10 min-h-screen pt-32 pb-20 px-4 sm:px-6">
+        <div class="max-w-4xl mx-auto">
+            <a href="index.html" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 mb-8 transition-colors text-sm sm:text-base">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Zurück zur Startseite
+            </a>
+
+            <div class="glass-morphism rounded-2xl p-6 sm:p-10">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 gradient-text">Datenschutzerklärung</h1>
+                
+                <div class="space-y-8 text-sm sm:text-base">
+                    <section>
+                        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-blue-300">1. Datenschutz auf einen Blick</h2>
+                        
+                        <h3 class="text-lg sm:text-xl font-semibold mb-3 text-blue-200">Allgemeine Hinweise</h3>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, 
+                            wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.
+                        </p>
+
+                        <h3 class="text-lg sm:text-xl font-semibold mb-3 text-blue-200">Datenerfassung auf dieser Website</h3>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            <strong class="text-blue-300">Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong><br>
+                            Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum entnehmen.
+                        </p>
+
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            <strong class="text-blue-300">Wie erfassen wir Ihre Daten?</strong><br>
+                            Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z.B. um Daten handeln, 
+                            die Sie in ein Kontaktformular eingeben. Andere Daten werden automatisch beim Besuch der Website durch unsere IT-Systeme erfasst.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-purple-300">2. Hosting</h2>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            Wir hosten die Inhalte unserer Website bei folgendem Anbieter:
+                        </p>
+                        
+                        <h3 class="text-lg sm:text-xl font-semibold mb-3 text-purple-200">Externes Hosting</h3>
+                        <p class="text-slate-300 leading-relaxed">
+                            Diese Website wird extern gehostet. Die personenbezogenen Daten, die auf dieser Website erfasst werden, 
+                            werden auf den Servern des Hosters / der Hoster gespeichert. Hierbei kann es sich v.a. um IP-Adressen, 
+                            Kontaktanfragen, Meta- und Kommunikationsdaten, Vertragsdaten, Kontaktdaten, Namen, Websitezugriffe und 
+                            sonstige Daten, die über eine Website generiert werden, handeln.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-cyan-300">3. Allgemeine Hinweise und Pflichtinformationen</h2>
+                        
+                        <h3 class="text-lg sm:text-xl font-semibold mb-3 text-cyan-200">Datenschutz</h3>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre 
+                            personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.
+                        </p>
+
+                        <h3 class="text-lg sm:text-xl font-semibold mb-3 text-cyan-200">Hinweis zur verantwortlichen Stelle</h3>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:<br><br>
+                            SaracAI GmbH<br>
+                            Musterstraße 123<br>
+                            10115 Berlin<br>
+                            Deutschland<br><br>
+                            Telefon: +49 (0) 30 12345678<br>
+                            E-Mail: info@saracai.de
+                        </p>
+
+                        <h3 class="text-lg sm:text-xl font-semibold mb-3 text-cyan-200">Widerruf Ihrer Einwilligung zur Datenverarbeitung</h3>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            Viele Datenverarbeitungsvorgänge sind nur mit Ihrer ausdrücklichen Einwilligung möglich. Sie können eine bereits 
+                            erteilte Einwilligung jederzeit widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-green-300">4. Datenerfassung auf dieser Website</h2>
+                        
+                        <h3 class="text-lg sm:text-xl font-semibold mb-3 text-green-200">Cookies</h3>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            Unsere Internetseiten verwenden so genannte „Cookies". Cookies sind kleine Textdateien und richten auf Ihrem Endgerät 
+                            keinen Schaden an. Sie werden entweder vorübergehend für die Dauer einer Sitzung (Session-Cookies) oder dauerhaft (permanente Cookies) 
+                            auf Ihrem Endgerät gespeichert.
+                        </p>
+
+                        <h3 class="text-lg sm:text-xl font-semibold mb-3 text-green-200">Server-Log-Dateien</h3>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten Server-Log-Dateien, 
+                            die Ihr Browser automatisch an uns übermittelt. Dies sind:
+                        </p>
+                        <ul class="list-disc list-inside text-slate-300 mb-4 space-y-2 ml-4">
+                            <li>Browsertyp und Browserversion</li>
+                            <li>verwendetes Betriebssystem</li>
+                            <li>Referrer URL</li>
+                            <li>Hostname des zugreifenden Rechners</li>
+                            <li>Uhrzeit der Serveranfrage</li>
+                            <li>IP-Adresse</li>
+                        </ul>
+
+                        <h3 class="text-lg sm:text-xl font-semibold mb-3 text-green-200">Kontaktformular</h3>
+                        <p class="text-slate-300 leading-relaxed">
+                            Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive 
+                            der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. 
+                            Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-blue-300">5. Ihre Rechte</h2>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten 
+                            personenbezogenen Daten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. 
+                            Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese Einwilligung jederzeit für die 
+                            Zukunft widerrufen. Außerdem haben Sie das Recht, unter bestimmten Umständen die Einschränkung der Verarbeitung 
+                            Ihrer personenbezogenen Daten zu verlangen.
+                        </p>
+                        <p class="text-slate-300 leading-relaxed">
+                            Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-purple-300">6. Analyse-Tools und Werbung</h2>
+                        <p class="text-slate-300 leading-relaxed">
+                            Beim Besuch dieser Website kann Ihr Surf-Verhalten statistisch ausgewertet werden. Das geschieht vor allem mit 
+                            sogenannten Analyseprogrammen. Detaillierte Informationen zu diesen Analyseprogrammen finden Sie in der folgenden Datenschutzerklärung.
+                        </p>
+                    </section>
+
+                    <div class="mt-8 p-4 sm:p-6 bg-blue-500/10 border border-blue-500/30 rounded-xl">
+                        <p class="text-xs sm:text-sm text-slate-300">
+                            <strong class="text-blue-300">Hinweis:</strong> Diese Datenschutzerklärung wurde zum Zweck der allgemeinen Information erstellt. 
+                            Für spezifische rechtliche Beratung konsultieren Sie bitte einen Rechtsanwalt. Stand: November 2025
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    
+    <!-- Footer -->
+    <footer class="relative py-8 sm:py-12 px-4 sm:px-6 border-t border-blue-500/20">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <svg viewBox="0 0 40 40" class="w-8 h-8" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="footerLogo" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#3b82f6"/>
+                                    <stop offset="100%" style="stop-color:#06b6d4"/>
+                                </linearGradient>
+                            </defs>
+                            <circle cx="20" cy="20" r="18" fill="none" stroke="url(#footerLogo)" stroke-width="2"/>
+                            <circle cx="20" cy="20" r="8" fill="url(#footerLogo)"/>
+                        </svg>
+                        <span class="text-lg sm:text-xl font-bold gradient-text">SaracAI</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-400">Next-Generation KI-Agenten für Ihr Business</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-3 sm:mb-4 text-sm sm:text-base text-blue-300">Produkte</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm text-slate-400">
+                        <li><a href="conversational-ai.html" class="hover:text-blue-400 transition-colors">Conversational AI</a></li>
+                        <li><a href="automation-engine.html" class="hover:text-blue-400 transition-colors">Automation Engine</a></li>
+                        <li><a href="predictive-analytics.html" class="hover:text-blue-400 transition-colors">Predictive Analytics</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-3 sm:mb-4 text-sm sm:text-base text-purple-300">Unternehmen</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm text-slate-400">
+                        <li><a href="index.html" class="hover:text-purple-400 transition-colors">Über uns</a></li>
+                        <li><a href="index.html#kontakt" class="hover:text-purple-400 transition-colors">Kontakt</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-3 sm:mb-4 text-sm sm:text-base text-cyan-300">Rechtliches</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm text-slate-400">
+                        <li><a href="impressum.html" class="hover:text-cyan-400 transition-colors">Impressum</a></li>
+                        <li><a href="datenschutz.html" class="hover:text-cyan-400 transition-colors">Datenschutz</a></li>
+                        <li><a href="agb.html" class="hover:text-cyan-400 transition-colors">AGB</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-6 sm:pt-8 border-t border-blue-500/20 text-center text-xs sm:text-sm text-slate-400">
+                <p>&copy; 2025 SaracAI. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const menuIcon = document.getElementById('menuIcon');
+            const closeIcon = document.getElementById('closeIcon');
+            
+            menu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>

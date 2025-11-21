@@ -5,123 +5,329 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGB - SaracAI</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { overflow-x: hidden !important; max-width: 100vw; scroll-behavior: smooth; }
+        
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        @keyframes pulse-glow { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+        @keyframes gradient-shift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        
+        .glass-morphism { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(59, 130, 246, 0.2); }
+        .gradient-text { background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4); background-size: 300% 100%; animation: gradient-shift 5s ease infinite; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-hover { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card-hover:hover { transform: translateY(-10px) scale(1.02); }
+        
+        @media (max-width: 768px) {
+            body { font-size: 14px; }
+            h1 { font-size: 2rem !important; }
+            h2 { font-size: 1.75rem !important; }
+            h3 { font-size: 1.5rem !important; }
+        }
+    </style>
+
 </head>
-<body class="bg-gradient-to-br from-slate-950 via-blue-950 to-purple-950 text-white min-h-screen">
-    <div class="max-w-4xl mx-auto px-6 py-20">
-        <a href="saracai-final.html" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 mb-8">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-            </svg>
-            Zurück zur Startseite
-        </a>
-        
-        <h1 class="text-5xl font-bold mb-8 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Allgemeine Geschäftsbedingungen</h1>
-        
-        <div class="bg-slate-900/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl p-8 space-y-8">
-            <div>
-                <h2 class="text-2xl font-bold text-blue-400 mb-3">§ 1 Geltungsbereich</h2>
-                <p class="text-slate-300 text-sm leading-relaxed">
-                    Diese Allgemeinen Geschäftsbedingungen (AGB) gelten für alle Verträge zwischen der SaracAI GmbH 
-                    (nachfolgend "Anbieter") und ihren Kunden über die Erbringung von KI-basierten Dienstleistungen 
-                    und Software-as-a-Service (SaaS) Lösungen.
-                </p>
+<body class="bg-gradient-to-br from-slate-950 via-blue-950 to-purple-950 text-white">
+    
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute top-20 left-10 w-64 sm:w-96 h-64 sm:h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse"></div>
+    </div>
+
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-morphism">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <a href="index.html" class="flex items-center gap-3">
+                    <svg viewBox="0 0 40 40" class="w-8 h-8 sm:w-10 sm:h-10" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3b82f6"/>
+                                <stop offset="100%" style="stop-color:#06b6d4"/>
+                            </linearGradient>
+                        </defs>
+                        <circle cx="20" cy="20" r="18" fill="none" stroke="url(#logoGradient)" stroke-width="2"/>
+                        <circle cx="20" cy="20" r="8" fill="url(#logoGradient)"/>
+                    </svg>
+                    <span class="text-lg sm:text-2xl font-bold gradient-text">SaracAI</span>
+                </a>
+                
+                <div class="hidden md:flex items-center gap-4 lg:gap-6">
+                    <a href="index.html" class="hover:text-blue-400 transition-colors text-sm lg:text-base">Home</a>
+                    <a href="index.html#agents" class="hover:text-blue-400 transition-colors text-sm lg:text-base">KI-Agenten</a>
+                    <a href="index.html#kontakt" class="px-4 lg:px-6 py-2 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg font-semibold hover:shadow-lg transition-all text-sm lg:text-base">
+                        Beratung buchen
+                    </a>
+                </div>
+
+                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                    <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
             </div>
-            
-            <div>
-                <h2 class="text-2xl font-bold text-blue-400 mb-3">§ 2 Vertragsgegenstand</h2>
-                <p class="text-slate-300 text-sm leading-relaxed mb-3">
-                    Der Anbieter erbringt Dienstleistungen im Bereich künstlicher Intelligenz, insbesondere:
-                </p>
-                <ul class="text-slate-300 text-sm space-y-2 ml-6 list-disc">
-                    <li>Bereitstellung von KI-Agenten und Automatisierungslösungen</li>
-                    <li>Cloud-basierte SaaS-Lösungen</li>
-                    <li>Beratungsleistungen im Bereich KI-Integration</li>
-                    <li>Support und Wartung der bereitgestellten Systeme</li>
-                </ul>
-            </div>
-            
-            <div>
-                <h2 class="text-2xl font-bold text-blue-400 mb-3">§ 3 Vertragsschluss</h2>
-                <p class="text-slate-300 text-sm leading-relaxed">
-                    Der Vertrag kommt durch die Annahme eines Angebots des Anbieters durch den Kunden oder durch 
-                    die Freischaltung des Zugangs zu den Dienstleistungen zustande. Alle Angebote sind freibleibend.
-                </p>
-            </div>
-            
-            <div>
-                <h2 class="text-2xl font-bold text-blue-400 mb-3">§ 4 Leistungsumfang</h2>
-                <p class="text-slate-300 text-sm leading-relaxed">
-                    Der konkrete Leistungsumfang ergibt sich aus der jeweiligen Leistungsbeschreibung und den 
-                    individuellen Vereinbarungen zwischen Anbieter und Kunde.
-                </p>
-            </div>
-            
-            <div>
-                <h2 class="text-2xl font-bold text-blue-400 mb-3">§ 5 Preise und Zahlung</h2>
-                <p class="text-slate-300 text-sm leading-relaxed">
-                    Es gelten die zum Zeitpunkt der Bestellung angegebenen Preise. Alle Preise verstehen sich 
-                    zuzüglich der gesetzlichen Mehrwertsteuer. Rechnungen sind innerhalb von 14 Tagen nach 
-                    Rechnungsdatum ohne Abzug zur Zahlung fällig.
-                </p>
-            </div>
-            
-            <div>
-                <h2 class="text-2xl font-bold text-blue-400 mb-3">§ 6 Laufzeit und Kündigung</h2>
-                <p class="text-slate-300 text-sm leading-relaxed">
-                    Die Mindestvertragslaufzeit und Kündigungsfristen ergeben sich aus der jeweiligen 
-                    Produktbeschreibung oder individuellen Vereinbarung. Sofern nicht anders vereinbart, 
-                    verlängert sich der Vertrag automatisch um weitere Monate.
-                </p>
-            </div>
-            
-            <div>
-                <h2 class="text-2xl font-bold text-blue-400 mb-3">§ 7 Gewährleistung</h2>
-                <p class="text-slate-300 text-sm leading-relaxed">
-                    Der Anbieter gewährleistet eine Verfügbarkeit der Dienste von mindestens 99%. Für Mängel 
-                    haftet der Anbieter nach den gesetzlichen Bestimmungen.
-                </p>
-            </div>
-            
-            <div>
-                <h2 class="text-2xl font-bold text-blue-400 mb-3">§ 8 Haftung</h2>
-                <p class="text-slate-300 text-sm leading-relaxed">
-                    Der Anbieter haftet unbeschränkt für Vorsatz und grobe Fahrlässigkeit. Bei leichter Fahrlässigkeit 
-                    haftet der Anbieter nur bei Verletzung wesentlicher Vertragspflichten.
-                </p>
-            </div>
-            
-            <div>
-                <h2 class="text-2xl font-bold text-blue-400 mb-3">§ 9 Datenschutz</h2>
-                <p class="text-slate-300 text-sm leading-relaxed">
-                    Der Anbieter verpflichtet sich zur Einhaltung der geltenden Datenschutzbestimmungen, 
-                    insbesondere der DSGVO. Weitere Informationen finden Sie in unserer Datenschutzerklärung.
-                </p>
-            </div>
-            
-            <div>
-                <h2 class="text-2xl font-bold text-blue-400 mb-3">§ 10 Schlussbestimmungen</h2>
-                <p class="text-slate-300 text-sm leading-relaxed">
-                    Es gilt das Recht der Bundesrepublik Deutschland. Gerichtsstand ist der Sitz des Anbieters. 
-                    Sollten einzelne Bestimmungen unwirksam sein, bleibt die Wirksamkeit der übrigen Bestimmungen 
-                    hiervon unberührt.
-                </p>
-            </div>
-            
-            <div class="pt-6 border-t border-slate-700">
-                <p class="text-slate-500 text-sm italic">
-                    Hinweis: Dies sind Platzhalter-AGB. Bitte ersetzen Sie diese durch rechtssichere, auf Ihr 
-                    Geschäftsmodell zugeschnittene AGB. Wir empfehlen dringend die Beratung durch einen 
-                    spezialisierten Rechtsanwalt.
-                </p>
-            </div>
-            
-            <div class="pt-4">
-                <p class="text-slate-400 text-sm">
-                    Stand: Januar 2025<br>
-                    SaracAI GmbH
-                </p>
+
+            <div id="mobileMenu" class="hidden md:hidden py-4 space-y-4">
+                <a href="index.html" class="block hover:text-blue-400 transition-colors" onclick="toggleMobileMenu()">Home</a>
+                <a href="index.html#agents" class="block hover:text-blue-400 transition-colors" onclick="toggleMobileMenu()">KI-Agenten</a>
+                <a href="index.html#kontakt" class="block px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg font-semibold text-center" onclick="toggleMobileMenu()">Beratung buchen</a>
             </div>
         </div>
-    </div>
+    </nav>
+
+
+    <main class="relative z-10 min-h-screen pt-32 pb-20 px-4 sm:px-6">
+        <div class="max-w-4xl mx-auto">
+            <a href="index.html" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 mb-8 transition-colors text-sm sm:text-base">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Zurück zur Startseite
+            </a>
+
+            <div class="glass-morphism rounded-2xl p-6 sm:p-10">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 gradient-text">Allgemeine Geschäftsbedingungen (AGB)</h1>
+                
+                <div class="space-y-8 text-sm sm:text-base">
+                    <section>
+                        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-blue-300">§ 1 Geltungsbereich</h2>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            (1) Diese Allgemeinen Geschäftsbedingungen (nachfolgend "AGB") der SaracAI GmbH (nachfolgend "Anbieter") 
+                            gelten für alle Verträge über KI-Lösungen und damit zusammenhängende Dienstleistungen, die zwischen dem 
+                            Anbieter und einem Kunden (nachfolgend "Kunde") geschlossen werden.
+                        </p>
+                        <p class="text-slate-300 leading-relaxed">
+                            (2) Abweichende, entgegenstehende oder ergänzende Allgemeine Geschäftsbedingungen des Kunden werden nur dann 
+                            und insoweit Vertragsbestandteil, als der Anbieter ihrer Geltung ausdrücklich schriftlich zugestimmt hat.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-purple-300">§ 2 Vertragsgegenstand</h2>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            (1) Gegenstand dieser AGB ist die Bereitstellung von KI-basierten Softwarelösungen als Service (SaaS) sowie 
+                            die damit verbundenen Dienstleistungen.
+                        </p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            (2) Der konkrete Leistungsumfang ergibt sich aus der jeweiligen Leistungsbeschreibung und dem individuellen Vertrag.
+                        </p>
+                        <p class="text-slate-300 leading-relaxed">
+                            (3) Der Anbieter schuldet keine bestimmten Erfolge, es sei denn, dies wurde ausdrücklich vereinbart.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-cyan-300">§ 3 Vertragsschluss</h2>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            (1) Die Darstellung der Produkte im Online-Angebot stellt kein rechtlich bindendes Angebot, sondern einen 
+                            unverbindlichen Online-Katalog dar.
+                        </p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            (2) Durch Absenden einer Bestellung gibt der Kunde ein verbindliches Angebot zum Vertragsschluss ab. 
+                            Der Anbieter kann dieses Angebot innerhalb von 5 Werktagen annehmen.
+                        </p>
+                        <p class="text-slate-300 leading-relaxed">
+                            (3) Die Annahme erfolgt durch Zusendung einer Auftragsbestätigung oder durch Bereitstellung der bestellten Leistung.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-green-300">§ 4 Preise und Zahlungsbedingungen</h2>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            (1) Es gelten die zum Zeitpunkt der Bestellung angegebenen Preise. Alle Preise verstehen sich zuzüglich der 
+                            gesetzlichen Mehrwertsteuer.
+                        </p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            (2) Die Zahlung erfolgt wahlweise per Rechnung, Lastschrift oder Kreditkarte.
+                        </p>
+                        <p class="text-slate-300 leading-relaxed">
+                            (3) Bei Zahlungsverzug ist der Anbieter berechtigt, Verzugszinsen in Höhe von 9 Prozentpunkten über dem 
+                            Basiszinssatz zu verlangen.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-blue-300">§ 5 Leistungserbringung und Mitwirkungspflichten</h2>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            (1) Der Anbieter erbringt seine Leistungen nach dem aktuellen Stand der Technik.
+                        </p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            (2) Der Kunde ist verpflichtet, die für die Leistungserbringung erforderlichen Mitwirkungshandlungen 
+                            rechtzeitig und vollständig zu erbringen.
+                        </p>
+                        <p class="text-slate-300 leading-relaxed">
+                            (3) Der Kunde stellt sicher, dass seine technische Infrastruktur die Mindestanforderungen erfüllt.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-purple-300">§ 6 Verfügbarkeit und Wartung</h2>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            (1) Der Anbieter strebt eine Verfügbarkeit der Dienste von 99% im Jahresmittel an. Hiervon ausgenommen 
+                            sind Wartungsarbeiten und höhere Gewalt.
+                        </p>
+                        <p class="text-slate-300 leading-relaxed">
+                            (2) Geplante Wartungsarbeiten werden dem Kunden mindestens 48 Stunden im Voraus angekündigt.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-cyan-300">§ 7 Nutzungsrechte</h2>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            (1) Der Anbieter räumt dem Kunden ein nicht ausschließliches, nicht übertragbares Recht zur Nutzung 
+                            der bereitgestellten Software ein.
+                        </p>
+                        <p class="text-slate-300 leading-relaxed">
+                            (2) Alle Rechte an der Software und den damit verbundenen Materialien verbleiben beim Anbieter.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-green-300">§ 8 Datenschutz und Vertraulichkeit</h2>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            (1) Der Anbieter verpflichtet sich, alle datenschutzrechtlichen Bestimmungen, insbesondere die DSGVO, einzuhalten.
+                        </p>
+                        <p class="text-slate-300 leading-relaxed">
+                            (2) Beide Parteien verpflichten sich zur Vertraulichkeit über alle im Rahmen der Zusammenarbeit 
+                            erlangten Informationen.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-blue-300">§ 9 Haftung</h2>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            (1) Der Anbieter haftet unbeschränkt für Vorsatz und grobe Fahrlässigkeit sowie bei Verletzung von 
+                            Leben, Körper oder Gesundheit.
+                        </p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            (2) Bei leichter Fahrlässigkeit haftet der Anbieter nur bei Verletzung wesentlicher Vertragspflichten 
+                            (Kardinalpflichten) und ist der Höhe nach auf den vertragstypischen, vorhersehbaren Schaden begrenzt.
+                        </p>
+                        <p class="text-slate-300 leading-relaxed">
+                            (3) Die Haftung nach dem Produkthaftungsgesetz bleibt unberührt.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-purple-300">§ 10 Vertragslaufzeit und Kündigung</h2>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            (1) Die Vertragslaufzeit ergibt sich aus der individuellen Vereinbarung.
+                        </p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            (2) Sofern nicht anders vereinbart, verlängert sich der Vertrag automatisch um jeweils ein weiteres Jahr, 
+                            wenn er nicht mit einer Frist von 3 Monaten zum Ende der Laufzeit gekündigt wird.
+                        </p>
+                        <p class="text-slate-300 leading-relaxed">
+                            (3) Das Recht zur außerordentlichen Kündigung aus wichtigem Grund bleibt unberührt.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2 class="text-xl sm:text-2xl font-bold mb-4 text-cyan-300">§ 11 Schlussbestimmungen</h2>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            (1) Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts.
+                        </p>
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            (2) Erfüllungsort und Gerichtsstand ist, soweit gesetzlich zulässig, der Sitz des Anbieters.
+                        </p>
+                        <p class="text-slate-300 leading-relaxed">
+                            (3) Sollten einzelne Bestimmungen dieser AGB unwirksam sein oder werden, berührt dies die Wirksamkeit 
+                            der übrigen Bestimmungen nicht.
+                        </p>
+                    </section>
+
+                    <div class="mt-8 p-4 sm:p-6 bg-cyan-500/10 border border-cyan-500/30 rounded-xl">
+                        <p class="text-xs sm:text-sm text-slate-300">
+                            <strong class="text-cyan-300">Hinweis:</strong> Diese AGB wurden zum Zweck der allgemeinen Information erstellt. 
+                            Für spezifische rechtliche Beratung konsultieren Sie bitte einen Rechtsanwalt. Stand: November 2025
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    
+    <!-- Footer -->
+    <footer class="relative py-8 sm:py-12 px-4 sm:px-6 border-t border-blue-500/20">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <svg viewBox="0 0 40 40" class="w-8 h-8" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="footerLogo" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#3b82f6"/>
+                                    <stop offset="100%" style="stop-color:#06b6d4"/>
+                                </linearGradient>
+                            </defs>
+                            <circle cx="20" cy="20" r="18" fill="none" stroke="url(#footerLogo)" stroke-width="2"/>
+                            <circle cx="20" cy="20" r="8" fill="url(#footerLogo)"/>
+                        </svg>
+                        <span class="text-lg sm:text-xl font-bold gradient-text">SaracAI</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-400">Next-Generation KI-Agenten für Ihr Business</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-3 sm:mb-4 text-sm sm:text-base text-blue-300">Produkte</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm text-slate-400">
+                        <li><a href="conversational-ai.html" class="hover:text-blue-400 transition-colors">Conversational AI</a></li>
+                        <li><a href="automation-engine.html" class="hover:text-blue-400 transition-colors">Automation Engine</a></li>
+                        <li><a href="predictive-analytics.html" class="hover:text-blue-400 transition-colors">Predictive Analytics</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-3 sm:mb-4 text-sm sm:text-base text-purple-300">Unternehmen</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm text-slate-400">
+                        <li><a href="index.html" class="hover:text-purple-400 transition-colors">Über uns</a></li>
+                        <li><a href="index.html#kontakt" class="hover:text-purple-400 transition-colors">Kontakt</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-3 sm:mb-4 text-sm sm:text-base text-cyan-300">Rechtliches</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm text-slate-400">
+                        <li><a href="impressum.html" class="hover:text-cyan-400 transition-colors">Impressum</a></li>
+                        <li><a href="datenschutz.html" class="hover:text-cyan-400 transition-colors">Datenschutz</a></li>
+                        <li><a href="agb.html" class="hover:text-cyan-400 transition-colors">AGB</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-6 sm:pt-8 border-t border-blue-500/20 text-center text-xs sm:text-sm text-slate-400">
+                <p>&copy; 2025 SaracAI. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const menuIcon = document.getElementById('menuIcon');
+            const closeIcon = document.getElementById('closeIcon');
+            
+            menu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
