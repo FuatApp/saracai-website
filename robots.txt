@@ -1,0 +1,21 @@
+# SaracAI - Robots.txt
+# Erlaubt allen Suchmaschinen alle Seiten zu crawlen
+
+User-agent: *
+Allow: /
+
+# Sitemap Location
+Sitemap: https://saracai.de/sitemap.xml
+
+# Crawl-Delay (optional, höflich zu Suchmaschinen)
+Crawl-delay: 1
+
+# Spezifische Anweisungen für bekannte Bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
